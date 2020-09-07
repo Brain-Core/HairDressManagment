@@ -42,14 +42,48 @@ create table t_coiffure
 	constraint pk_coiffure primary key(id)
 )
 
-create table t_paiement
+create table t_souscription
 (
-	
-	constraint pk_paiement primary key()
-
+	id int not null,
+	date_souscription date,
+	client  varchar(100),
+	u_name varchar(100),
+	constraint pk_souscription primary key()
 )
 
-create table t_detail_paiement
+create table t_ligne_souscription
 (
-	constraint pk_paiement primary key(id)
+	id_souscription int not null,
+	id_coiffure int not null,
+	qte float,
+	constraint pk_ primary key(id_souscription, id_coiffure)
+)
+
+create table t_paiement
+(
+	id int not null,
+	id_souscription int not null
+	date_paiement date,
+	montant float,
+	u_name varchar(100),
+	constraint pl_paiement primary key(id)
+)
+
+create table t_depense
+(
+	id int not null,
+	intitule text not null,
+	executant varchar(255), not null,
+	montant float, -- doit se soustraire a la caisse
+	date_depense date,
+	u_name varchar(100) not null,
+	constraint pk_depense primary key(id) 
+)
+
+create table t_caisse
+(
+	id int not null,
+	montant float,
+	date_update date,
+	contraint pk_caisse primary key(id)
 )
