@@ -48,7 +48,7 @@ create table t_souscription
 	date_souscription date,
 	client  varchar(100),
 	u_name varchar(100),
-	constraint pk_souscription primary key()
+	constraint pk_souscription primary key
 )
 
 create table t_ligne_souscription
@@ -62,7 +62,7 @@ create table t_ligne_souscription
 create table t_paiement
 (
 	id int not null,
-	id_souscription int not null
+	id_souscription int not null,
 	date_paiement date,
 	montant float,
 	u_name varchar(100),
@@ -73,7 +73,7 @@ create table t_depense
 (
 	id int not null,
 	intitule text not null,
-	executant varchar(255), not null,
+	executant varchar(255) not null,
 	montant float, -- doit se soustraire a la caisse
 	date_depense date,
 	u_name varchar(100) not null,
