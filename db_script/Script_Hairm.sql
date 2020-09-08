@@ -48,7 +48,7 @@ create table t_souscription
 	date_souscription date,
 	client  varchar(100),
 	u_name varchar(100),
-	constraint pk_souscription primary key
+	constraint pk_souscription primary key(id)
 )
 
 create table t_ligne_souscription
