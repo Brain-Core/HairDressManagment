@@ -88,6 +88,17 @@ create table t_caisse
 	contraint pk_caisse primary key(id)
 )
 
+create table t_abone
+(
+	id int not null,
+	nom varchar(50) not null,
+	postnom varchar(50) not null,
+	prenom varchar(50) not null,
+	telephone varchar(15) not null,
+	adresse varchar(100) not null,
+)
+
+
 ------------Autres contraintes---------------
 
 alter table t_type add constraint Unique_type unique(typeItem)
@@ -222,3 +233,22 @@ BEGIN
 	INSERT INTO tPaiement VALUES(@id, @id_souscription, @date_paiement,@montant, @_u_name  )
 	UPDATE t_caisse SET montant = montant + @montant WHERE id = 1
 END
+
+GO
+create procedure sp_update_abone
+(
+	@id int ,
+	@nom varchar(50) ,
+	@postnom varchar(50),
+	@prenom varchar(50) ,
+	@telephone varchar(15) ,
+	@adresse varchar(100) ,
+
+)
+as
+begin
+	if not exists(select * from t_coiffure where id = @id)
+		insert into t_abone values(@id,@nom,@postnom ,@prenom,@telephone,@adresse)
+	else
+		update t_abone set nom=@nom, postnom= @postnom ,prenom=@prenom,telephone=@telephone,adresse=@adresse where id = @id
+end
