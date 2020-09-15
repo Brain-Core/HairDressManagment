@@ -7,23 +7,10 @@ use db_Hairm
 create table t_user
 (
 	u_name varchar(100) not null,
+	u_phone varchar(13),
 	u_pass varchar(25) not null,
 	u_accreditation varchar(50) not null,
 	constraint pf_user primary key(u_name)
-)
-
-create table t_journalier
-(
-	id int not null,
-	nom varchar(50) not null,
-	postnom varchar(50) not null,
-	prenom varchar(50) not null,
-	lieu_naissance text,
-	date_naissance date,
-	etat_civil varchar(100),
-	piece_identite char(255),
-	numero_piece_identite varchar(50),
-	constraint pk_jpurnalier primary key(id)
 )
 
 create table t_type
@@ -87,3 +74,13 @@ create table t_caisse
 	date_update date,
 	contraint pk_caisse primary key(id)
 )
+
+---------------------------- CONTRAINTES---------------------
+
+alter table t_depense add constraint fk_user_depense foreign key (u_name) references t_user(u_name)
+alter table t_paiement add constraint fk_user_paiement foreign key (u_name) references t_user(u_name)
+alter table t_souscription add constraint fk_user_souscription foreign key (u_name) references t_user(u_name)
+
+alter table t_ligne_souscription add constraint fk_souscription_paiement foreign key (id_souscription) references t_souscription(id)
+alter table t_depense add constraint fk_user_depense foreign key (u_name) references t_user(u_name)
+
