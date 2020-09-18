@@ -1,13 +1,13 @@
 package brain.models;
 
-public class ClsCouffure {
+public class ClsCoiffure {
     
     private int id ;
     private String modele;
     private String typeItem;
     private float montant ;
 
-    public ClsCouffure(int id, String modele, String typeItem, float montant) {
+    public ClsCoiffure(int id, String modele, String typeItem, float montant) {
         this.id = id;
         this.modele = modele;
         this.typeItem = typeItem;
