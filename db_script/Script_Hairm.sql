@@ -52,6 +52,7 @@ create table t_paiement
 	id_souscription int not null,
 	date_paiement date,
 	montant float,
+	cash float,
 	u_name varchar(100),
 	constraint pl_paiement primary key(id)
 )
@@ -73,6 +74,18 @@ create table t_caisse
 	montant float,
 	date_update date,
 	contraint pk_caisse primary key(id)
+)
+
+create table t_abone
+(
+	id int not null,
+	nom varchar(50) not null,
+	postnom varchar(50) not null,
+	prenom varchar(50) not null,
+	telephone varchar(15) not null,
+	adresse varchar(100) not null,
+	contraint pk_abone primary key(id)
+
 )
 
 ---------------------------- CONTRAINTES---------------------
@@ -209,12 +222,32 @@ CREATE PROCEDURE SP_UPDATE_tPaiement
 	@souscription int,
 	@date_paiement date,
 	@montant float,
+	@cash float,
 	@u_name varchar(100)
 )
 AS
 BEGIN
 	DECLARE @id_souscription INT =(SELECT id FROM t_souscription WHERE id =@souscription)
 	declare @_u_name varchar(100) = (select u_name from t_user where u_name = @u_name)
-	INSERT INTO tPaiement VALUES(@id, @id_souscription, @date_paiement,@montant, @_u_name  )
-	UPDATE t_caisse SET montant = montant + @montant WHERE id = 1
+	INSERT INTO tPaiement VALUES(@id, @id_souscription, @date_paiement,@montant, @cash, @_u_name  )
+	UPDATE t_caisse SET montant = montant + @montant WHERE id = 1 -- il faudra revoir ici
 END
+
+GO
+create procedure sp_update_abone
+(
+	@id int ,
+	@nom varchar(50) ,
+	@postnom varchar(50),
+	@prenom varchar(50) ,
+	@telephone varchar(15) ,
+	@adresse varchar(100) 
+
+)
+as
+begin
+	if not exists(select * from t_coiffure where id = @id)
+		insert into t_abone values(@id,@nom,@postnom ,@prenom,@telephone,@adresse)
+	else
+		update t_abone set nom=@nom, postnom= @postnom ,prenom=@prenom,telephone=@telephone,adresse=@adresse where id = @id
+end
