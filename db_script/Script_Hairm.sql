@@ -66,6 +66,7 @@ create table t_paiement
 	date_paiement date,
 	montant float,
 	u_name varchar(100),
+	cash float,
 	constraint pl_paiement primary key(id)
 )
 
@@ -96,6 +97,8 @@ create table t_abone
 	prenom varchar(50) not null,
 	telephone varchar(15) not null,
 	adresse varchar(100) not null,
+	contraint pk_abone primary key(id)
+
 )
 
 
@@ -242,7 +245,7 @@ create procedure sp_update_abone
 	@postnom varchar(50),
 	@prenom varchar(50) ,
 	@telephone varchar(15) ,
-	@adresse varchar(100) ,
+	@adresse varchar(100) 
 
 )
 as
