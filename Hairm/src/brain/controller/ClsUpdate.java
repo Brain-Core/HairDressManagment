@@ -5,10 +5,11 @@
  */
 package brain.controller;
 
+import static brain.controller.DbConnect.disconnectDb;
 import brain.models.ClsCaisse;
 import brain.models.ClsDepense;
 import brain.models.ClsLingneSouscription;
-import brain.models.ClsCouffure;
+import brain.models.ClsCoiffure;
 import brain.models.ClsJournalier;
 import brain.models.ClsPaiement;
 import brain.models.ClsSouscription;
@@ -44,18 +45,18 @@ public class ClsUpdate {
             ps.setInt(1, type.getId());
             ps.setString(2, type.getTypeItem());
             ps.executeUpdate();
-            disconnectDb.disconnectDb();
+            DbConnect.disconnectDb();
             return true;
         }
 
         else if (obj instanceof ClsSouscription)
         {
             ClsSouscription souscription = (ClsSouscription)obj;
-            PreparedStatement ps = DbConnect.connectDb.prepareStatement("EXECUTE SP_UPDATE_tsouscription ?,?,?,?");
+            PreparedStatement ps = DbConnect.connectDb().prepareStatement("EXECUTE SP_UPDATE_tsouscription ?,?,?,?");
             ps.setInt(1, souscription.getId());
             ps.setDate(2, souscription.getDate_souscription());
             ps.setString(3, souscription.getClient());
-            ps.setInt(4, souscription.getUser().getId());
+            ps.setString(4, souscription.getUser().getName());
             ps.executeUpdate();
             DbConnect.disconnectDb();
             return true;
@@ -69,7 +70,7 @@ public class ClsUpdate {
             ps.setInt(2, paiement.getSouscription().getId());
             ps.setDate(3, paiement.getDate_paiement());
             ps.setFloat(4, paiement.getMontant());
-            ps.setInt(5, paiement.getUser().getId());
+            ps.setString(5, paiement.getUser().getName());
             ps.executeUpdate();
             DbConnect.disconnectDb();
             return true;
@@ -93,9 +94,9 @@ public class ClsUpdate {
             return true;
         }
 
-        else if (obj instanceof ClsCouffure)
+        else if (obj instanceof ClsCoiffure)
         {
-            ClsCouffure coiffure = (ClsCouffure)obj;
+            ClsCoiffure coiffure = (ClsCoiffure)obj;
             PreparedStatement ps = DbConnect.connectDb().prepareStatement("EXECUTE SP_UPDATE_tcoiffure ?,?,?,?");
             ps.setInt(1, coiffure.getId());
             ps.setString(2, coiffure.getModele());
@@ -127,7 +128,7 @@ public class ClsUpdate {
             ps.setString(3, depense.getExecutant());
             ps.setFloat(4, depense.getMontant());
             ps.setDate(5, depense.getDate_depense());
-            ps.setInt(6, depense.getUser().getId());
+            ps.setString(6, depense.getUser().getName());
             ps.executeUpdate();
             DbConnect.disconnectDb();
             return true;
@@ -160,8 +161,7 @@ public class ClsUpdate {
     
     public static boolean fx_SdeleteData(String tbl, String id) throws ClassNotFoundException, SQLException, Exception
     {
-        PreparedStatement ps = DbConnect.connectDb().prepareStatement
-                                ("DELETE FROM " + tbl + "WHERE id = ?");
+        PreparedStatement ps = DbConnect.connectDb().prepareStatement("DELETE FROM " + tbl + "WHERE id = ?");
         ps.setString(1, id);
         ps.executeUpdate();
         DbConnect.disconnectDb();

@@ -11,10 +11,10 @@ public class ClsJournalier {
     private String lieu_naissance;
     private Date date_naissance;
     private String etat_civil;
-    private char piece_identite;
+    private String piece_identite;
     private String numero_piece_identite;
 
-    public ClsJournalier(int id, String nom, String postnom, String prenom, String lieu_naissance, Date date_naissance, String etat_civil, char piece_identite, String numero_piece_identite) {
+    public ClsJournalier(int id, String nom, String postnom, String prenom, String lieu_naissance, Date date_naissance, String etat_civil, String piece_identite, String numero_piece_identite) {
         this.id = id;
         this.nom = nom;
         this.postnom = postnom;
@@ -82,11 +82,11 @@ public class ClsJournalier {
         this.etat_civil = etat_civil;
     }
 
-    public char getPiece_identite() {
+    public String getPiece_identite() {
         return piece_identite;
     }
 
-    public void setPiece_identite(char piece_identite) {
+    public void setPiece_identite(String piece_identite) {
         this.piece_identite = piece_identite;
     }
 

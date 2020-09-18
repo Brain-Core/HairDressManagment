@@ -3,10 +3,10 @@ package brain.models;
 public class ClsLingneSouscription {
     
     private ClsSouscription souscription;
-    private ClsCouffure coiffure;
+    private ClsCoiffure coiffure;
     private float qte;
 
-    public ClsLingneSouscription(ClsSouscription souscription, ClsCouffure coiffure, float qte) {
+    public ClsLingneSouscription(ClsSouscription souscription, ClsCoiffure coiffure, float qte) {
         this.souscription = souscription;
         this.coiffure = coiffure;
         this.qte = qte;
@@ -20,11 +20,11 @@ public class ClsLingneSouscription {
         this.souscription = souscription;
     }
 
-    public ClsCouffure getCoiffure() {
+    public ClsCoiffure getCoiffure() {
         return coiffure;
     }
 
-    public void setCoiffure(ClsCouffure coiffure) {
+    public void setCoiffure(ClsCoiffure coiffure) {
         this.coiffure = coiffure;
     }
 
