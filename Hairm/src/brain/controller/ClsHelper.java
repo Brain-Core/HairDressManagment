@@ -19,7 +19,7 @@ public class ClsHelper {
     
     public static void load_Panel(JPanel pnl1, JPanel pnl2)
     {
-        pnl1.removeAll();
+        pnl1.removeAll(); 
         pnl1.add(pnl2);
         pnl1.revalidate();
         pnl1.repaint();
